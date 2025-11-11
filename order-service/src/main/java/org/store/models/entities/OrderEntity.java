@@ -1,8 +1,25 @@
 package org.store.models.entities;
 
+import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
+
+@Table
+@Entity(name = "ORDERS")
 public class OrderEntity {
-    private String orderId;
-    private Long userId;               // Внешний ключ на пользователя
-    private UserEntity customer;       // или только reference
+    @Id
+    @Column(name = "ORDERID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long orderId;
+    @Column(name = "ORDERNUMBER")
+    public String orderNumber;
+    @Column(name = "DATECREATE")
+    public LocalDateTime dateCreate;
+    @OneToMany(cascade = CascadeType.ALL)
+    @Column(name = "PRODUCTID")
+    public OrderEntity orderEntity;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "USERID")
+    public UserEntity customer;
 
 }

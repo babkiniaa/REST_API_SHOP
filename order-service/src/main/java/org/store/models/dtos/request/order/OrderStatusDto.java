@@ -1,7 +1,8 @@
-package org.store.models.dtos.request;
+package org.store.models.dtos.request.order;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.store.models.enums.OrderStatus;
 
 import java.time.LocalDateTime;
 

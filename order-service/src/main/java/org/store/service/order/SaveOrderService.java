@@ -1,12 +1,17 @@
 package org.store.service.order;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.transaction.Transactional;
+import org.store.models.dtos.request.order.SaveOrderRequest;
+
+import java.beans.Transient;
 
 @ApplicationScoped
 public class SaveOrderService {
 
 
-    public void saveOrder(){
+    @Transactional
+    public void saveOrder(SaveOrderRequest saveOrderRequest){
 
     }
 }

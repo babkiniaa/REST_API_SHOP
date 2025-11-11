@@ -1,4 +1,4 @@
-package org.store.models.dtos.request;
+package org.store.models.dtos.request.order;
 
 public class OrderGetRequest {
     private String orderId;

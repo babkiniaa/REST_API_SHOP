@@ -2,7 +2,8 @@ package org.store.service.order;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.store.models.dtos.request.SaveOrderRequest;
+import org.store.models.dtos.request.client.ClientCreate;
+import org.store.models.dtos.request.order.SaveOrderRequest;
 import org.store.service.validate.OrderValidate;
 
 @ApplicationScoped
@@ -18,6 +19,15 @@ public class MainProcessor {
     }
 
     public void createOrder(SaveOrderRequest saveOrderRequest) {
+        orderValidate.validOrder(saveOrderRequest);
+        service.saveOrder(saveOrderRequest);
+        //резерв заказа обновление статуса
+        //отправка в печатный сервис
+        //отправка на почту
+        //Логика выкупа заказа
+    }
+
+    public void createUser(ClientCreate clientCreate) {
 
     }
 }

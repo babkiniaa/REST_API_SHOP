@@ -1,4 +1,4 @@
-package org.store.models.dtos.request;
+package org.store.models.dtos.request.order;
 
 import org.store.models.enums.DocumentType;
 
