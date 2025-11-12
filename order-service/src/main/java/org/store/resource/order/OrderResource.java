@@ -28,13 +28,18 @@ public class OrderResource {
     @POST
     @Path("create")
     public Response createOrder(SaveOrderRequest saveOrderRequest) {
-        mainProcessor.createOrder(saveOrderRequest);
-        return Response.ok().build();
+        return Response.ok(mainProcessor.createOrder(saveOrderRequest)).build();
     }
 
     @POST
     @Path("get/pgf")
     public Response getPdFromOrder(OrderPrdInfo orderPrdInfo) {
+        return Response.ok().build();
+    }
+
+    @POST
+    @Path("get/status/reserved")
+    public Response getStatusOrder(OrderStatusRequest orderStatusRequest) {
         return Response.ok().build();
     }
 
@@ -49,5 +54,6 @@ public class OrderResource {
     public List<OrderResponseDto> getOrdersByPeriod(@PathParam("userName") String userName) {
         return List.of(new OrderResponseDto());
     }
+
 
 }

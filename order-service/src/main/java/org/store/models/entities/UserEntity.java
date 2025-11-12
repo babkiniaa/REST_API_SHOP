@@ -1,14 +1,17 @@
 package org.store.models.entities;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 import org.store.models.enums.UserStatus;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Table
 @Entity(name = "USERS")
-public class UserEntity {
+public class UserEntity extends PanacheEntityBase {
     @Id
     @Column(name = "USERID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,8 +26,22 @@ public class UserEntity {
     public UserStatus status;
     @Column(name = "REGISTERDATE")
     public LocalDateTime registeredAt;
+    @Column(name = "BIRTHDAY")
+    public LocalDate BirthDay;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "")
+    @JoinColumn(name = "ORDERID")
     public List<OrderEntity> orderEntity;
+
+    public static Optional<PanacheEntityBase> findByEmail(String email) {
+        return find("email", email).firstResultOptional();
+    }
+
+    public static List<UserEntity> findActiveUsers() {
+        return list("status", UserStatus.ACTIVE);
+    }
+
+    public static List<UserEntity> findByName(String name) {
+        return list("LOWER(fullName) LIKE LOWER(?1)", "%" + name + "%");
+    }
 
 }

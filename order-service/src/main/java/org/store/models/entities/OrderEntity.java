@@ -1,12 +1,13 @@
 package org.store.models.entities;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
 @Table
 @Entity(name = "ORDERS")
-public class OrderEntity {
+public class OrderEntity extends PanacheEntityBase {
     @Id
     @Column(name = "ORDERID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
