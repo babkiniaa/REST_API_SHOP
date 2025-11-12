@@ -9,7 +9,7 @@ import org.store.models.entities.UserEntity;
 public class SaveUserService {
 
     @Transactional
-    public void saveUser(ClientCreate clientCreate) {
+    public void saveUser(ClientCreate clientCreate) throws RuntimeException {
         if (UserEntity.findByEmail(clientCreate.getEmail()).isPresent()) {
             throw new RuntimeException("Данный пользователь уже зарегистрирован");
         }

@@ -40,9 +40,10 @@ public class MainProcessor {
     }
 
 
-    public void createUser(ClientCreate clientCreate) {
+    public ClientCreate createUser(ClientCreate clientCreate) throws RuntimeException {
         log.info("создание пользователя " + clientCreate.getFullName());
         userValidate.validUser(clientCreate);
         userService.saveUser(clientCreate);
+        return clientCreate;
     }
 }
