@@ -8,7 +8,7 @@ import java.util.Map;
 @Getter
 @Setter
 public class EmailRequestDocx {
-    private String orderId;
+    private Long orderId;
     private String customerName;
     private String customerEmail;
     private String documentType;

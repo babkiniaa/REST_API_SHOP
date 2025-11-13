@@ -10,7 +10,7 @@ public class SaveUserService {
 
     @Transactional
     public void saveUser(ClientCreate clientCreate) throws RuntimeException {
-        if (UserEntity.findByEmail(clientCreate.getEmail()).isPresent()) {
+        if (UserEntity.findByEmail(clientCreate.getEmail()) != null) {
             throw new RuntimeException("Данный пользователь уже зарегистрирован");
         }
 

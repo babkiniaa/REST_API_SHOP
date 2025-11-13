@@ -2,6 +2,7 @@ package org.store.models.entities;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
+import org.h2.engine.User;
 import org.store.models.enums.UserStatus;
 
 import java.time.LocalDate;
@@ -32,8 +33,8 @@ public class UserEntity extends PanacheEntityBase {
     @JoinColumn(name = "ORDERID")
     public List<OrderEntity> orderEntity;
 
-    public static Optional<PanacheEntityBase> findByEmail(String email) {
-        return find("email", email).firstResultOptional();
+    public static UserEntity findByEmail(String email) {
+        return find("email", email).firstResult();
     }
 
     public static List<UserEntity> findActiveUsers() {

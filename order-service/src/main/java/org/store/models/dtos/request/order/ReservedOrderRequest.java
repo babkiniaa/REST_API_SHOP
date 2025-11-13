@@ -9,10 +9,10 @@ import java.util.List;
 @Setter
 @Getter
 public class ReservedOrderRequest {
-    private String orderId;
+    private Long orderId;
     private String reservationId;
     private LocalDateTime reserveUntil;
     private List<ProductOrder> products;
-    private String customerId;
+    private Long customerId;
 
 }
