@@ -7,6 +7,7 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
+import org.store.models.dtos.request.order.OrderByPeriod;
 import org.store.models.dtos.request.order.OrderPrdInfo;
 import org.store.models.dtos.request.order.OrderStatusDto;
 import org.store.models.dtos.request.order.SaveOrderRequest;
@@ -34,26 +35,19 @@ public class OrderResource {
     @POST
     @Path("get/pgf")
     public Response getPdFromOrder(OrderPrdInfo orderPrdInfo) {
-        return Response.ok().build();
+        return Response.ok(mainProcessor.getPdfForOrder(orderPrdInfo)).build();
     }
 
     @POST
-    @Path("get/status/reserved")
-    public Response getStatusOrder(OrderStatusRequest orderStatusRequest) {
-        return Response.ok().build();
+    @Path("get/order/period")
+    public List<OrderResponseDto> getOrdersByPeriod(OrderByPeriod orderByPeriod) {
+        return mainProcessor.getListFromPeriod(orderByPeriod);
     }
 
     @GET
-    @Path("get/order/{id}")
+    @Path("get/order/id/{id}")
     public OrderStatusDto getOrdersById(@PathParam("id") Long id) {
-        return new OrderStatusDto();
+        return mainProcessor.getOrderInfo(id);
     }
-
-    @GET
-    @Path("get/order/{userName}")
-    public List<OrderResponseDto> getOrdersByPeriod(@PathParam("userName") String userName) {
-        return List.of(new OrderResponseDto());
-    }
-
 
 }

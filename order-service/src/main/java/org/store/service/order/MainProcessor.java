@@ -8,17 +8,20 @@ import org.store.client.paymentServiceClient;
 import org.store.client.printServiceClient;
 import org.store.client.productServiceClient;
 import org.store.mappers.EmailMapper;
+import org.store.mappers.OrderMapper;
 import org.store.mappers.PrintServiceMapper;
 import org.store.mappers.ReservedMapper;
 import org.store.models.dtos.request.client.ClientCreate;
 import org.store.models.dtos.request.email.EmailInfoRequest;
 import org.store.models.dtos.request.email.EmailRequestDocx;
-import org.store.models.dtos.request.order.ReservedOrderRequest;
-import org.store.models.dtos.request.order.SaveOrderRequest;
+import org.store.models.dtos.request.order.*;
+import org.store.models.dtos.response.OrderResponseDto;
 import org.store.models.entities.OrderEntity;
 import org.store.service.user.SaveUserService;
 import org.store.service.validate.OrderValidate;
 import org.store.service.validate.UserValidate;
+
+import java.util.List;
 
 import static io.vertx.codegen.CodeGenProcessor.log;
 
@@ -32,6 +35,7 @@ public class MainProcessor {
     ReservedMapper reservedMapper;
     PrintServiceMapper printServiceMapper;
     EmailMapper emailMapper;
+    OrderMapper orderMapper;
     printServiceClient printServiceClient;
     emailSendServiceClient emailSendServiceClient;
     paymentServiceClient paymentServiceClient;
@@ -45,6 +49,7 @@ public class MainProcessor {
                          ReservedMapper reservedMapper,
                          PrintServiceMapper printServiceMapper,
                          EmailMapper emailMapper,
+                         OrderMapper orderMapper,
                          @RestClient org.store.client.printServiceClient printServiceClient,
                          @RestClient org.store.client.emailSendServiceClient emailSendServiceClient,
                          @RestClient org.store.client.paymentServiceClient paymentServiceClient,
@@ -56,6 +61,7 @@ public class MainProcessor {
         this.orderValidate = orderValidate;
         this.reservedMapper = reservedMapper;
         this.printServiceMapper = printServiceMapper;
+        this.orderMapper = orderMapper;
         this.printServiceClient = printServiceClient;
         this.emailSendServiceClient = emailSendServiceClient;
         this.paymentServiceClient = paymentServiceClient;
@@ -76,14 +82,42 @@ public class MainProcessor {
             emailSendServiceClient.sendInfo(emailInfoRequest);
         }
         ).start();
+
         return saveOrderRequest;
     }
 
+    public OrderPrdInfo getPdfForOrder(OrderPrdInfo orderPrdInfo) throws RuntimeException {
+        OrderEntity order = OrderEntity.findById(orderPrdInfo.getOrderId());
+        EmailRequestDocx emailRequestDocx;
+
+        if (order == null) {
+            throw new RuntimeException("Заказ для печати не найден");
+        }
+        emailRequestDocx = printServiceMapper.createDocxRequest(order, orderPrdInfo);
+        printServiceClient.sendGenerateDocx(emailRequestDocx);
+
+        return orderPrdInfo;
+    }
+
+    public OrderStatusDto getOrderInfo(Long orderId) {
+        OrderStatusDto orderStatusDto;
+        OrderEntity orderEntity = OrderEntity.findById(orderId);
+
+        orderStatusDto = orderMapper.mapOrder(orderEntity);
+
+        return orderStatusDto;
+    }
 
     public ClientCreate createUser(ClientCreate clientCreate) throws RuntimeException {
         log.info("создание пользователя " + clientCreate.getFullName());
         userValidate.validUser(clientCreate);
         userService.saveUser(clientCreate);
+
         return clientCreate;
+    }
+
+    public List<OrderResponseDto> getListFromPeriod(OrderByPeriod orderByPeriod) {
+        List<OrderEntity> orders = OrderEntity.find("dateCreate > ?1 and dateCreate < ?2 and USERID.EMAIL = ?3", orderByPeriod.getDateStart(), orderByPeriod.getDateEnd(), orderByPeriod.getEmail()).list();
+        return orderMapper.mapListDto(orders);
     }
 }
