@@ -11,8 +11,8 @@ import org.store.models.dtos.request.email.EmailRequestDocx;
 
 import java.util.concurrent.CompletionStage;
 
-@Path("localhost:8060/print")
-@RegisterRestClient
+@Path("/print")
+@RegisterRestClient(baseUri = "http://localhost:8060")
 public interface printServiceClient {
 
     @POST

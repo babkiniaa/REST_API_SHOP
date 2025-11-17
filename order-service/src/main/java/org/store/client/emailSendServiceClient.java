@@ -7,8 +7,9 @@ import org.store.models.dtos.request.email.EmailInfoRequest;
 
 import java.util.concurrent.CompletableFuture;
 
-@Path("localhost:8040/email")
-@RegisterRestClient
+
+@Path("/email")
+@RegisterRestClient(baseUri = "http://localhost:8040")
 public interface emailSendServiceClient {
 
     @POST

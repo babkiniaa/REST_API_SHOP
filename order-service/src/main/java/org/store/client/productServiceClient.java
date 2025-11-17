@@ -7,8 +7,8 @@ import org.store.models.dtos.request.order.ReservedOrderRequest;
 
 import java.util.concurrent.CompletableFuture;
 
-@RegisterRestClient
-@Path("localhost:8070/product")
+@Path("/product")
+@RegisterRestClient(baseUri = "http://localhost:8070")
 public interface productServiceClient {
 
     @POST

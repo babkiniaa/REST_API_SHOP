@@ -12,3 +12,4 @@ public class OrderByPeriod {
     private LocalDate dateStart;
     private LocalDate dateEnd;
 }
+

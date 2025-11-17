@@ -2,6 +2,8 @@ package org.store.service.order;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import lombok.extern.slf4j.Slf4j;
+import org.eclipse.microprofile.context.ManagedExecutor;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.store.client.emailSendServiceClient;
 import org.store.client.paymentServiceClient;
@@ -23,9 +25,8 @@ import org.store.service.validate.UserValidate;
 
 import java.util.List;
 
-import static io.vertx.codegen.CodeGenProcessor.log;
-
 @ApplicationScoped
+@Slf4j
 public class MainProcessor {
 
     SaveUserService userService;
@@ -40,6 +41,7 @@ public class MainProcessor {
     emailSendServiceClient emailSendServiceClient;
     paymentServiceClient paymentServiceClient;
     productServiceClient productServiceClient;
+    ManagedExecutor managedExecutor;
 
     @Inject
     public MainProcessor(SaveUserService userService,
@@ -50,6 +52,7 @@ public class MainProcessor {
                          PrintServiceMapper printServiceMapper,
                          EmailMapper emailMapper,
                          OrderMapper orderMapper,
+                         ManagedExecutor managedExecutor,
                          @RestClient org.store.client.printServiceClient printServiceClient,
                          @RestClient org.store.client.emailSendServiceClient emailSendServiceClient,
                          @RestClient org.store.client.paymentServiceClient paymentServiceClient,
@@ -63,6 +66,7 @@ public class MainProcessor {
         this.printServiceMapper = printServiceMapper;
         this.orderMapper = orderMapper;
         this.printServiceClient = printServiceClient;
+        this.managedExecutor = managedExecutor;
         this.emailSendServiceClient = emailSendServiceClient;
         this.paymentServiceClient = paymentServiceClient;
         this.productServiceClient = productServiceClient;
@@ -72,16 +76,16 @@ public class MainProcessor {
     public SaveOrderRequest createOrder(SaveOrderRequest saveOrderRequest) {
         log.info("создание заказа для пользователя " + saveOrderRequest.getCustomerName());
         orderValidate.validOrder(saveOrderRequest);
-        new Thread(() -> {
-            OrderEntity orderEntity = orderService.saveOrder(saveOrderRequest);
-            ReservedOrderRequest reservedOrderRequest = reservedMapper.createReserveRequest(orderEntity.orderId, saveOrderRequest);
-            productServiceClient.reservedProduct(reservedOrderRequest);
-            EmailRequestDocx emailRequestDocx = printServiceMapper.createDocxRequest(orderEntity.orderId, saveOrderRequest);
-            printServiceClient.sendGenerateDocx(emailRequestDocx);
-            EmailInfoRequest emailInfoRequest = emailMapper.createEmailRequest(orderEntity.orderId, saveOrderRequest);
-            emailSendServiceClient.sendInfo(emailInfoRequest);
-        }
-        ).start();
+        OrderEntity orderEntity = orderService.saveOrder(saveOrderRequest);
+        managedExecutor.submit(() -> {
+                    ReservedOrderRequest reservedOrderRequest = reservedMapper.createReserveRequest(orderEntity.orderId, saveOrderRequest);
+                    productServiceClient.reservedProduct(reservedOrderRequest);
+                    EmailRequestDocx emailRequestDocx = printServiceMapper.createDocxRequest(orderEntity.orderId, saveOrderRequest);
+                    printServiceClient.sendGenerateDocx(emailRequestDocx);
+                    EmailInfoRequest emailInfoRequest = emailMapper.createEmailRequest(orderEntity.orderId, saveOrderRequest);
+                    emailSendServiceClient.sendInfo(emailInfoRequest);
+                }
+        );
 
         return saveOrderRequest;
     }

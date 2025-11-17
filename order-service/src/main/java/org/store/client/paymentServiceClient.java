@@ -8,11 +8,10 @@ import org.store.models.dtos.request.payment.PaymentRequest;
 
 import java.util.concurrent.CompletableFuture;
 
-@Path("localhost:8050/payment")
-@RegisterRestClient
+@Path("/payment")
+@RegisterRestClient(baseUri = "http://localhost:8050")
 public interface paymentServiceClient {
 
     @POST
-    @Path("/payment")
     CompletableFuture<String> reservedProduct(PaymentRequest request);
 }
