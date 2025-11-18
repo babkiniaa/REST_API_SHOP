@@ -24,7 +24,7 @@ public class NotificationResource {
     @POST
     @Path("/send/info")
     @Asynchronous
-    public CompletionStage<Response> sendNotification(NotificationRequest request) {
+    public CompletionStage<String> sendNotification(NotificationRequest request) {
         return CompletableFuture.supplyAsync(() -> {
             return notificationService.processNotification(request);
         });

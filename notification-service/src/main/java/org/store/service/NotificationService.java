@@ -6,6 +6,8 @@ import org.store.models.dto.request.NotificationRequest;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.store.models.enums.TypeNotification.*;
+
 @ApplicationScoped
 @Slf4j
 public class NotificationService {
@@ -112,15 +114,6 @@ public class NotificationService {
 
         } catch (Exception e) {
             throw new RuntimeException("Ошибка многоканальной отправки: " + e.getMessage());
-        }
-    }
-
-    private void validateNotificationRequest(NotificationRequest request) {
-        if (request.getType() == null) {
-            throw new RuntimeException("Тип уведомления не указан");
-        }
-        if (request.getRecipientEmail() == null && request.getPhoneNumber() == null) {
-            throw new RuntimeException("Не указаны контактные данные");
         }
     }
 
