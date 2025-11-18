@@ -11,7 +11,9 @@ public class Validator {
         if (request.getOrderId() == null) {
             throw new RuntimeException("Не указаны данные заказа");
         }
-        if(request.get)
+        if(request.getEmailAddress() == null){
+            throw new RuntimeException("Не указана почта для отправки");
+        }
 
     }
 }

@@ -9,7 +9,6 @@ import java.lang.reflect.Type;
 @Getter
 @Setter
 public class NotificationRequest {
-    private String emailAddress;
     private TypeNotification type;
     private Long orderId;
 }

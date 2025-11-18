@@ -1,5 +1,11 @@
 package org.store.models.entity;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Table
 @Entity(name = "ORDERS")
 public class OrderEntity extends PanacheEntityBase {
