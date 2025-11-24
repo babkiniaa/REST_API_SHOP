@@ -1,5 +1,6 @@
 package org.store.mappers;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import org.store.models.dtos.request.order.OrderStatusDto;
 import org.store.models.dtos.response.OrderResponseDto;
 import org.store.models.entities.OrderEntity;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@ApplicationScoped
 public class OrderMapper {
 
     public OrderStatusDto mapOrder(OrderEntity orderEntity) {

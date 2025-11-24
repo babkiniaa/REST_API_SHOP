@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.context.ManagedExecutor;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.store.client.emailSendServiceClient;
-import org.store.client.paymentServiceClient;
 import org.store.client.printServiceClient;
 import org.store.client.productServiceClient;
 import org.store.mappers.EmailMapper;
@@ -39,7 +38,6 @@ public class MainProcessor {
     OrderMapper orderMapper;
     printServiceClient printServiceClient;
     emailSendServiceClient emailSendServiceClient;
-    paymentServiceClient paymentServiceClient;
     productServiceClient productServiceClient;
     ManagedExecutor managedExecutor;
 
@@ -55,7 +53,6 @@ public class MainProcessor {
                          ManagedExecutor managedExecutor,
                          @RestClient org.store.client.printServiceClient printServiceClient,
                          @RestClient org.store.client.emailSendServiceClient emailSendServiceClient,
-                         @RestClient org.store.client.paymentServiceClient paymentServiceClient,
                          @RestClient org.store.client.productServiceClient productServiceClient) {
         this.userService = userService;
         this.userValidate = userValidate;
@@ -68,7 +65,6 @@ public class MainProcessor {
         this.printServiceClient = printServiceClient;
         this.managedExecutor = managedExecutor;
         this.emailSendServiceClient = emailSendServiceClient;
-        this.paymentServiceClient = paymentServiceClient;
         this.productServiceClient = productServiceClient;
     }
 
@@ -79,7 +75,7 @@ public class MainProcessor {
         OrderEntity orderEntity = orderService.saveOrder(saveOrderRequest);
         managedExecutor.submit(() -> {
                     ReservedOrderRequest reservedOrderRequest = reservedMapper.createReserveRequest(orderEntity.orderId, saveOrderRequest);
-                    productServiceClient.reservedProduct(reservedOrderRequest);
+                    productServiceClient.reservedProduct(reservedOrderRequest.getOrderId());
                     EmailRequestDocx emailRequestDocx = printServiceMapper.createDocxRequest(orderEntity.orderId, saveOrderRequest);
                     printServiceClient.sendGenerateDocx(emailRequestDocx);
                     EmailInfoRequest emailInfoRequest = emailMapper.createEmailRequest(orderEntity.orderId, saveOrderRequest);

@@ -1,7 +1,9 @@
 package org.store.validate;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import org.store.models.dto.request.NotificationRequest;
 
+@ApplicationScoped
 public class Validator {
 
     public void validateNotificationRequest(NotificationRequest request) {

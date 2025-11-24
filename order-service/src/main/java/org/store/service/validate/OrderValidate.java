@@ -1,7 +1,9 @@
 package org.store.service.validate;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import org.store.models.dtos.request.order.SaveOrderRequest;
 
+@ApplicationScoped
 public class OrderValidate {
 
     public void validOrder(SaveOrderRequest saveOrderRequest) throws RuntimeException {

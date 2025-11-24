@@ -14,7 +14,7 @@ public class UserEntity extends PanacheEntityBase {
     @Column(name = "USERID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long userId;
-    @Column(name = "")
+    @Column(name = "EMAIL")
     public String email;
     @Column(name = "PHONENUMBER")
     public String phoneNumber;
