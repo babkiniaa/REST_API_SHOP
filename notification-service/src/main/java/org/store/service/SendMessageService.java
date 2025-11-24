@@ -1,0 +1,99 @@
+package org.store.service;
+
+import jakarta.enterprise.context.ApplicationScoped;
+import lombok.extern.slf4j.Slf4j;
+import org.store.models.dto.request.NotificationRequest;
+
+import java.util.concurrent.TimeUnit;
+
+@Slf4j
+@ApplicationScoped
+public class SendMessageService {
+
+    public String sendEmailNotification(String emailAddress, NotificationRequest request) {
+        log.info("Начало отправки email...");
+
+        try {
+
+            sleep(500);
+            log.info("SMTP соединение установлено");
+
+            sleep(1200);
+            log.info("Данные отправлены на SMTP сервер");
+
+            sleep(800);
+            log.info("Email успешно доставлен на {}", emailAddress);
+
+            return "EMAIL_SENT";
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("Отправка email прервана");
+        }
+    }
+
+    public String sendSmsNotification(String phoneNumber, NotificationRequest request) {
+        log.info("Начало отправки SMS...");
+
+        try {
+            sleep(300);
+            log.info("Подключение к SMS шлюзу...");
+
+            sleep(1500);
+            log.info("SMS отправлено через API");
+
+            sleep(400);
+            log.info("SMS доставлено на {}", phoneNumber);
+
+            return "SMS_SENT";
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("Отправка SMS прервана");
+        }
+    }
+
+    public String sendPushNotification(String template, NotificationRequest request) {
+        log.info("Начало отправки Push-уведомления...");
+
+        try {
+            sleep(200);
+            log.info("Подключение к push-сервису...");
+
+            sleep(600);
+            log.info("Push отправлен в сервис");
+
+            sleep(300);
+            log.info("Push уведомление отправлено");
+
+            return "PUSH_SENT";
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("Отправка Push прервана");
+        }
+    }
+
+    public String sendMultiChannelNotification(String template, NotificationRequest request) {
+        log.info("Многоканальная отправка уведомления...");
+
+        try {
+            String emailResult = sendEmailNotification(template, request);
+            String smsResult = sendSmsNotification(template, request);
+            String pushResult = sendPushNotification(template, request);
+
+            log.info("Многоканальная отправка завершена: Email={}, SMS={}, Push={}",
+                    emailResult, smsResult, pushResult);
+
+            return "MULTI_CHANNEL_SENT";
+
+        } catch (Exception e) {
+            throw new RuntimeException("Ошибка многоканальной отправки: " + e.getMessage());
+        }
+    }
+
+    private void sleep(long millis) throws InterruptedException {
+        TimeUnit.MILLISECONDS.sleep(millis);
+    }
+
+}
