@@ -69,7 +69,7 @@ public class MainProcessor {
     }
 
 
-    public SaveOrderRequest createOrder(SaveOrderRequest saveOrderRequest) {
+    public SaveOrderRequest createOrder(SaveOrderRequest saveOrderRequest) throws RuntimeException {
         log.info("создание заказа для пользователя " + saveOrderRequest.getCustomerName());
         orderValidate.validOrder(saveOrderRequest);
         OrderEntity orderEntity = orderService.saveOrder(saveOrderRequest);

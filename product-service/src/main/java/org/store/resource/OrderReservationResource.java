@@ -5,12 +5,15 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import lombok.extern.slf4j.Slf4j;
 import org.store.models.entity.OrderEntity;
 import org.store.service.OrderReservationService;
 
 import java.util.Map;
 
+
 @Path("/api/orders")
+@Slf4j
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class OrderReservationResource {
@@ -19,8 +22,9 @@ public class OrderReservationResource {
     OrderReservationService reservationService;
 
     @POST
-    @Path("/{orderId}/reserve")
+    @Path("{orderId}/reserve")
     public Uni<Response> reserveOrderProducts(@PathParam("orderId") Long orderId) {
+       log.info("Сервис резервирования вызван");
         return Uni.createFrom().item(() -> OrderEntity.findById(orderId))
                 .onItem().ifNull().failWith(() -> new RuntimeException("Order not found: " + orderId))
                 .onItem().transformToUni(order -> reservationService.reserveOrderProducts((OrderEntity) order))

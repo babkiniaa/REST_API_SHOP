@@ -27,6 +27,8 @@ public interface printServiceClient {
 
     @GET
     @Path("/receipt/{orderId}/status")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     CompletionStage<String> getGeneratorCheck(@PathParam("orderId") String orderId);
 
 }

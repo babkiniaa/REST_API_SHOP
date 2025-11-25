@@ -1,8 +1,7 @@
 package org.store.client;
 
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import org.store.models.dtos.request.order.ReservedOrderRequest;
 
@@ -14,5 +13,7 @@ public interface productServiceClient {
 
     @POST
     @Path("/{orderId}/reserve")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     CompletableFuture<String> reservedProduct(@PathParam("orderId") Long orderId);
 }

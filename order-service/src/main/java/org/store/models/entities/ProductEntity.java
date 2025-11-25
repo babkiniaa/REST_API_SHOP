@@ -13,26 +13,26 @@ public class ProductEntity extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PRODUCT_ID")
-    private Long productId;
+    public Long productId;
     @Column(name = "SKU")
-    private String sku; //Артикул
+    public String sku; //Артикул
     @Column(name = "NAME")
-    private String name;
+    public String name;
     @Column(name = "DESCRIPTION")
-    private String description;
+    public String description;
     @Column(name = "PRICE")
-    private BigDecimal price;
+    public BigDecimal price;
     @Column(name = "STATUS")
-    private ProductStatus status;
+    public ProductStatus status;
     @Column(name = "STOCKQUANTITY")
-    private Integer stockQuantity;
+    public Integer stockQuantity;
     @Column(name = "CATEGORY")
-    private String category;
+    public String category;
     @Column(name = "IMAGEURL")
-    private String imageUrl;
+    public String imageUrl;
     @Column(name = "CREATEDAT")
-    private LocalDateTime createdAt;
+    public LocalDateTime createdAt;
     @Column(name = "UPDATEDAT")
-    private LocalDateTime updatedAt;
+    public LocalDateTime updatedAt;
 
 }

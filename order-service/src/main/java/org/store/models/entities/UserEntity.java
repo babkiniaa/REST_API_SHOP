@@ -34,7 +34,7 @@ public class UserEntity extends PanacheEntityBase {
     public List<OrderEntity> orderEntity;
 
     public static UserEntity findByEmail(String email) {
-        return find("email", email).firstResult();
+        return find("email = ?1", email).firstResult();
     }
 
     public static List<UserEntity> findActiveUsers() {
