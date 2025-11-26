@@ -18,7 +18,7 @@ public class OrderEntity extends PanacheEntityBase {
     @Column(name = "DATECREATE")
     public LocalDateTime dateCreate;
     @OneToMany(cascade = CascadeType.ALL)
-    @Column(name = "PRODUCTID")
+    @JoinColumn(name = "PRODUCTID")
     public List<ProductEntity> productEntity;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "USERID")

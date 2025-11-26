@@ -1,5 +1,6 @@
 package org.store.resource;
 
+import io.smallrye.common.annotation.Blocking;
 import io.smallrye.mutiny.Uni;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.store.models.entity.OrderEntity;
 import org.store.service.OrderReservationService;
 
+import java.time.Duration;
 import java.util.Map;
 
 
@@ -23,16 +25,28 @@ public class OrderReservationResource {
 
     @POST
     @Path("{orderId}/reserve")
-    public Uni<Response> reserveOrderProducts(@PathParam("orderId") Long orderId) {
-       log.info("Сервис резервирования вызван");
-        return Uni.createFrom().item(() -> OrderEntity.findById(orderId))
-                .onItem().ifNull().failWith(() -> new RuntimeException("Order not found: " + orderId))
-                .onItem().transformToUni(order -> reservationService.reserveOrderProducts((OrderEntity) order))
-                .onItem().transform(result -> Response.ok(result).build())
-                .onFailure().recoverWithItem(throwable ->
-                        Response.status(Response.Status.BAD_REQUEST)
-                                .entity(Map.of("error", throwable.getMessage()))
-                                .build()
-                );
+    @Blocking
+    public Response reserveOrderProducts(@PathParam("orderId") Long orderId) {
+        log.info("Резервирование заказа: {}", orderId);
+
+        try {
+            OrderEntity order = OrderEntity.findById(orderId);
+            if (order == null) {
+                return Response.status(Response.Status.NOT_FOUND)
+                        .entity(Map.of("error", "Заказ не найден: " + orderId))
+                        .build();
+            }
+
+            Map<String, Object> result = reservationService.reserveOrderProducts(order)
+                    .await().atMost(Duration.ofSeconds(30));
+
+            return Response.ok(result).build();
+
+        } catch (Exception e) {
+            log.error("Ошибка резервирования: {}", e.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(Map.of("error", e.getMessage()))
+                    .build();
+        }
     }
 }

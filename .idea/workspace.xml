@@ -5,25 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="44d69802-6ad8-415c-807e-7717d196ade5" name="Changes" comment="arch-005">
-      <change afterPath="$PROJECT_DIR$/document-service/src/main/java/org/store/models/enums/ProductStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/notification-service/src/main/java/org/store/models/enums/ProductStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/order-service/src/main/java/org/store/resource/BdResource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/product-service/src/main/java/org/store/models/enums/ProductStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/document-service/src/main/java/org/store/resource/BdResource.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/product-service/src/main/java/org/store/resource/BdResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/document-service/src/main/java/org/store/models/entity/ProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/document-service/src/main/java/org/store/models/entity/ProductEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/document-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/document-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notification-service/src/main/java/org/store/models/entity/ProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/notification-service/src/main/java/org/store/models/entity/ProductEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/store/client/emailSendServiceClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/org/store/client/emailSendServiceClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/store/client/printServiceClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/org/store/client/printServiceClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/store/client/productServiceClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/org/store/client/productServiceClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/store/models/entities/ProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/org/store/models/entities/ProductEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/store/models/entities/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/org/store/models/entities/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/store/service/order/MainProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/org/store/service/order/MainProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/store/service/order/SaveOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/org/store/service/order/SaveOrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notification-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/notification-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/org/store/models/entities/OrderEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/org/store/models/entities/OrderEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/order-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/resources/main.sql" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/resources/import.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/product-service/src/main/java/org/store/models/entity/ProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/java/org/store/models/entity/ProductEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/product-service/src/main/java/org/store/resource/OrderReservationResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/java/org/store/resource/OrderReservationResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/product-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/resources/application.properties" afterDir="false" />
     </list>
@@ -43,18 +31,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "babkiniaa"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;babkiniaa&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/babkiniaa/REST_API_SHOP.git",
-    "accountId": "fad30106-0b45-44a8-b6dc-ede0a0ef6dcc"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/babkiniaa/REST_API_SHOP.git&quot;,
+    &quot;accountId&quot;: &quot;fad30106-0b45-44a8-b6dc-ede0a0ef6dcc&quot;
   }
-}]]></component>
+}</component>
   <component name="GradleModuleStateConfig" initialized="true" />
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -70,8 +58,8 @@
     "Application.DocumentService.executor": "Run",
     "Application.Main.executor": "Run",
     "Application.NotificationServive.executor": "Run",
-    "Application.OrderService.executor": "Debug",
-    "Application.ProductService.executor": "Debug",
+    "Application.OrderService.executor": "Run",
+    "Application.ProductService.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "5-story-arch-005-реализация-базовой-асинхронной-цепочки",
@@ -94,6 +82,7 @@
       <recent name="C:\Users\Ярик\Desktop\REST_API_SHOP\order-service\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.store.resource" />
       <recent name="org.store.models.enums" />
       <recent name="org.store.models.entity" />
       <recent name="org.store.service" />
@@ -175,7 +164,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764013646463</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="arch-005">
+      <option name="closed" value="true" />
+      <created>1764102439156</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1764102439156</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -191,20 +188,19 @@
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/product-service/src/main/java/org/store/resource/OrderReservationResource.java</url>
-          <line>27</line>
-          <properties>
-            <option name="lambda-ordinal" value="-1" />
-          </properties>
-          <option name="timeStamp" value="10" />
+          <url>file://$PROJECT_DIR$/order-service/src/main/java/org/store/service/order/MainProcessor.java</url>
+          <line>79</line>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/product-service/src/main/java/org/store/resource/OrderReservationResource.java</url>
-          <line>28</line>
-          <properties>
-            <option name="lambda-ordinal" value="0" />
-          </properties>
-          <option name="timeStamp" value="11" />
+          <url>file://$PROJECT_DIR$/order-service/src/main/java/org/store/service/order/MainProcessor.java</url>
+          <line>77</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/order-service/src/main/java/org/store/service/order/MainProcessor.java</url>
+          <line>81</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
