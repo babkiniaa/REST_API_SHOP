@@ -1,5 +1,6 @@
 package org.store.mappers;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import org.store.models.dtos.request.email.EmailRequestDocx;
 import org.store.models.dtos.request.order.OrderPrdInfo;
 import org.store.models.dtos.request.order.SaveOrderRequest;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+@ApplicationScoped
 public class PrintServiceMapper {
 
     public EmailRequestDocx createDocxRequest(Long orderId, SaveOrderRequest saveOrderRequest) {

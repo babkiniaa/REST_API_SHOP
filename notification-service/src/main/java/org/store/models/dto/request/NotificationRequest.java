@@ -11,4 +11,5 @@ import java.lang.reflect.Type;
 public class NotificationRequest {
     private TypeNotification type;
     private Long orderId;
+    private Long emailAddress;
 }

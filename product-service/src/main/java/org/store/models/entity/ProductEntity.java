@@ -2,6 +2,7 @@ package org.store.models.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
+import org.store.models.enums.ProductStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -14,7 +15,7 @@ public class ProductEntity extends PanacheEntityBase {
     @Column(name = "PRODUCT_ID")
     public Long productId;
     @Column(name = "SKU")
-    public String sku;
+    public String sku; //Артикул
     @Column(name = "NAME")
     public String name;
     @Column(name = "DESCRIPTION")
@@ -22,7 +23,7 @@ public class ProductEntity extends PanacheEntityBase {
     @Column(name = "PRICE")
     public BigDecimal price;
     @Column(name = "STATUS")
-    public String status;
+    public ProductStatus status;
     @Column(name = "STOCKQUANTITY")
     public Integer stockQuantity;
     @Column(name = "CATEGORY")

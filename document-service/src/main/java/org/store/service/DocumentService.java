@@ -22,7 +22,6 @@ public class DocumentService {
     @Inject
     DocumentStorageService storageService;
 
-    @NonBlocking
     public Uni<String> generateReceiptAsync(String orderId) {
         log.info("Асинхронная генерация чека для заказа: {}", orderId);
 
@@ -38,7 +37,6 @@ public class DocumentService {
                 });
     }
 
-    @NonBlocking
     public Uni<Map<String, String>> generateOrderDocumentsAsync(String orderId) {
         log.info("Асинхронная генерация всех документов для заказа: {}", orderId);
 

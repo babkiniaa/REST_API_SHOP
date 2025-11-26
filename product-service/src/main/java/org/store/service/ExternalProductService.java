@@ -1,6 +1,5 @@
 package org.store.service;
 
-import io.smallrye.common.annotation.NonBlocking;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.extern.slf4j.Slf4j;
@@ -9,8 +8,7 @@ import org.store.models.dto.request.ReservedOrderRequest;
 @Slf4j
 @ApplicationScoped
 public class ExternalProductService {
-
-    @NonBlocking
+    
     public Uni<String> reserveProductsInExternalService(ReservedOrderRequest request) {
         log.info("Имитация запроса на резервирование во внешний сервис");
         log.info("Данные для резервирования: orderId={}, products={}",

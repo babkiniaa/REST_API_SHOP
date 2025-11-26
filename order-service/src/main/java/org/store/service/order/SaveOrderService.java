@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class SaveOrderService {
 
     @Transactional
-    public OrderEntity saveOrder(SaveOrderRequest saveOrderRequest) {
+    public OrderEntity saveOrder(SaveOrderRequest saveOrderRequest) throws RuntimeException {
         OrderEntity order = new OrderEntity();
 
         order.orderNumber = generateOrderNumber();
@@ -27,7 +27,7 @@ public class SaveOrderService {
         order.orderStatus = OrderStatus.PROCESSED.name();
         order.addressOrder = saveOrderRequest.getShippingAddress();
         order.awaitDateDeliver = LocalDateTime.now().plusDays(3);
-        order.customer = findOrCreateUser(saveOrderRequest.getCustomerEmail());
+        order.customer = findUser(saveOrderRequest.getCustomerEmail());
         order.productEntity = findProductsByIds(saveOrderRequest.getItems());
 
         order.persist();
@@ -49,12 +49,19 @@ public class SaveOrderService {
         List<Long> productIds = items.stream()
                 .map(ProductOrder::getProductId)
                 .collect(Collectors.toList());
-        List<ProductEntity> products = ProductEntity.find("productId in ?1", productIds).list();
+        List<ProductEntity> products = new ArrayList<>();
+
+        productIds.forEach(productId -> products.add(ProductEntity.find("productId = ?1", productId).firstResult()));
 
         return products;
     }
 
-    private UserEntity findOrCreateUser(String ourEmail) {
-        return UserEntity.findByEmail(ourEmail);
+    private UserEntity findUser(String ourEmail) throws RuntimeException {
+        UserEntity user = UserEntity.findByEmail(ourEmail);
+        if (user != null) {
+            return user;
+        } else {
+            throw new RuntimeException("Пользователь с email не найден " + ourEmail);
+        }
     }
 }

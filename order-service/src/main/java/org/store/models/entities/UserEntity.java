@@ -17,7 +17,7 @@ public class UserEntity extends PanacheEntityBase {
     @Column(name = "USERID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long userId;
-    @Column(name = "")
+    @Column(name = "EMAIL")
     public String email;
     @Column(name = "PHONENUMBER")
     public String phoneNumber;
@@ -34,7 +34,7 @@ public class UserEntity extends PanacheEntityBase {
     public List<OrderEntity> orderEntity;
 
     public static UserEntity findByEmail(String email) {
-        return find("email", email).firstResult();
+        return find("email = ?1", email).firstResult();
     }
 
     public static List<UserEntity> findActiveUsers() {
