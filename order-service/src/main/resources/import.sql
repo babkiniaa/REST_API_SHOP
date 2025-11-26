@@ -1,0 +1,11 @@
+INSERT INTO USERS (USERID, EMAIL, PHONENUMBER, FULLNAME, STATUS, REGISTERDATE, BIRTHDAY)
+VALUES
+(1, 'ivan@mail.ru', '+79161234567', 'Иван Иванов', 1, '2024-01-15 10:00:00', '1990-05-20'),
+(2, 'petr@mail.ru', '+79161234568', 'Петр Петров', 1, '2024-01-16 11:00:00', '1985-08-15'),
+(3, 'maria@mail.ru', '+79161234569', 'Мария Сидорова', 1, '2024-01-17 12:00:00', '1992-12-10');
+
+INSERT INTO PRODUCTS (SKU, NAME, DESCRIPTION, PRICE, STATUS, STOCKQUANTITY, CATEGORY, IMAGEURL, CREATEDAT, UPDATEDAT)
+VALUES
+('NOTEBOOK-001', 'Ноутбук Lenovo', 'Игровой ноутбук', 75000.00, 1, 10, 'ELECTRONICS', '/images/lenovo.jpg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('PHONE-001', 'iPhone 15', 'Смартфон Apple', 90000.00, 1, 25, 'ELECTRONICS', '/images/iphone.jpg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('BOOK-001', 'Война и мир', 'Книга Л. Толстого', 1500.00, 1, 100, 'BOOKS', '/images/book.jpg', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
